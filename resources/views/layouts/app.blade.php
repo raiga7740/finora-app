@@ -4,9 +4,12 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="csrf-token" content="{{ csrf_token() }}">
+    <meta name="robots" content="noindex, nofollow, noarchive">
     <title>{{ config('app.name', 'Finora') }} – {{ $title ?? 'Dashboard' }}</title>
+    <link rel="icon" type="image/png" sizes="32x32" href="{{ asset('favicon.png') }}">
+    <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}">
+    <link rel="apple-touch-icon" sizes="192x192" href="{{ asset('images/logo-192.png') }}">
     <link rel="preconnect" href="https://fonts.bunny.net">
-    <link rel="icon" type="image/jpeg" href="{{ asset('images/logo.jpg') }}">
     <link href="https://fonts.bunny.net/css?family=figtree:400,500,600,700,800&display=swap" rel="stylesheet" />
     @vite(['resources/css/app.css', 'resources/js/app.js'])
     <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>

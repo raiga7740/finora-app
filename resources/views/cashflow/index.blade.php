@@ -155,8 +155,8 @@
             (function () {
                 const series = @json($forecast['series']);
                 const dark = () => document.documentElement.classList.contains('dark');
-                const grid = () => dark() ? '#232329' : '#f3f4f6';
-                const tick = () => dark() ? '#71717a' : '#9ca3af';
+                const grid = () => dark() ? '#262a33' : '#e5e7eb';
+                const tick = () => dark() ? '#86948a' : '#64748b';
                 const symbol = @json($user->currency_symbol);
                 const locale = @json(($user->currency ?? 'IDR') === 'IDR' ? 'id' : 'en');
                 const buffer = {{ $forecast['buffer'] }};

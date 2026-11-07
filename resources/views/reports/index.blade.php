@@ -161,8 +161,8 @@
     <script>
         // 12-Month Trajectory Chart
         const isDarkReport = () => document.documentElement.classList.contains('dark');
-        const reportGridColor = () => isDarkReport() ? '#232329' : '#f3f4f6';
-        const reportTickColor = () => isDarkReport() ? '#71717a' : '#9ca3af';
+        const reportGridColor = () => isDarkReport() ? '#262a33' : '#e5e7eb';
+        const reportTickColor = () => isDarkReport() ? '#86948a' : '#64748b';
 
         const trendCtx = document.getElementById('trendChart').getContext('2d');
         const finoraTrendChart = new Chart(trendCtx, {

@@ -145,7 +145,7 @@
                        @focus="isFocused = true"
                        required
                        autocomplete="off"
-                       placeholder="{{ __('Smart Quick-Add: ketik misal &quot;makan siang padang 35rb bca&quot; atau &quot;gaji 8.5jt mandiri&quot; lalu tekan Enter...') }}"
+                       placeholder="{{ __('Smart Quick-Add: ketik misal "makan siang padang 35rb bca" atau "gaji 8.5jt mandiri" lalu tekan Enter...') }}"
                        class="w-full bg-transparent border-0 p-0 text-xs sm:text-sm font-medium text-gray-900 placeholder-gray-400 focus:outline-none focus:ring-0">
 
                 <template x-if="rawInput.length > 0">

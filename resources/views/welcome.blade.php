@@ -4,11 +4,139 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="csrf-token" content="{{ csrf_token() }}">
+    <!-- Primary SEO Meta Tags -->
     <title>Finora – Take Control of Your Money, Build Your Future</title>
-    <link rel="icon" type="image/jpeg" href="{{ asset('images/logo.jpg') }}">
+    <meta name="title" content="Finora – Take Control of Your Money, Build Your Future">
+    <meta name="description" content="Finora adalah platform manajemen keuangan pribadi modern dengan AI Financial Advisor, pelacak anggaran real-time, Smart Quick-Add, pemindai kuitansi OCR, pencatat utang & tagihan, serta analitik komprehensif.">
+    <meta name="keywords" content="finora, aplikasi keuangan, manajemen keuangan pribadi, pelacak anggaran, budget tracker, catat pengeluaran, ai financial advisor, financial health score, scanner struk ocr, pencatat utang, target tabungan">
+    <meta name="author" content="Finora">
+    <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
+    <link rel="canonical" href="{{ url()->current() }}">
+
+    <!-- Open Graph / Facebook / WhatsApp / LinkedIn -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="{{ url()->current() }}">
+    <meta property="og:site_name" content="Finora">
+    <meta property="og:title" content="Finora – Take Control of Your Money, Build Your Future">
+    <meta property="og:description" content="Kelola arus kas, anggaran bulanan, target tabungan, tagihan rutin, serta analisis kesehatan finansial Anda secara aman dan cerdas bersama Finora.">
+    <meta property="og:image" content="{{ asset('images/logo-512.png') }}">
+    <meta property="og:image:width" content="512">
+    <meta property="og:image:height" content="512">
+    <meta property="og:image:alt" content="Finora - Personal Finance Platform">
+    <meta property="og:locale" content="{{ str_replace('_', '-', app()->getLocale()) == 'id' ? 'id_ID' : 'en_US' }}">
+
+    <!-- Twitter / X Cards -->
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:url" content="{{ url()->current() }}">
+    <meta name="twitter:title" content="Finora – Take Control of Your Money, Build Your Future">
+    <meta name="twitter:description" content="Kelola arus kas, anggaran bulanan, target tabungan, tagihan rutin, serta analisis kesehatan finansial Anda bersama Finora.">
+    <meta name="twitter:image" content="{{ asset('images/logo-512.png') }}">
+
+    <!-- Mobile Theme, PWA & Favicon -->
+    <meta name="theme-color" content="#00c078">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="default">
+    <meta name="apple-mobile-web-app-title" content="Finora">
+    <link rel="icon" type="image/png" sizes="32x32" href="{{ asset('favicon.png') }}">
+    <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}">
+    <link rel="apple-touch-icon" sizes="192x192" href="{{ asset('images/logo-192.png') }}">
+    <link rel="manifest" href="{{ asset('site.webmanifest') }}">
+
+    <!-- Fonts & Assets Preload -->
     <link rel="preconnect" href="https://fonts.bunny.net">
     <link href="https://fonts.bunny.net/css?family=figtree:300,400,500,600,700,800,900&display=swap" rel="stylesheet" />
     @vite(['resources/css/app.css', 'resources/js/app.js'])
+
+    <!-- Structured Data (JSON-LD Schema.org) -->
+    <script type="application/ld+json">
+    {!! json_encode([
+        '@context' => 'https://schema.org',
+        '@graph' => [
+            [
+                '@type' => 'WebApplication',
+                '@id' => url('/') . '#webapp',
+                'name' => 'Finora',
+                'url' => url('/'),
+                'applicationCategory' => 'FinanceApplication',
+                'operatingSystem' => 'All',
+                'description' => 'Platform manajemen keuangan pribadi cerdas dengan asisten AI, pelacak anggaran, pencatat transaksi instan, pemindai kuitansi OCR, dan analitik keuangan komprehensif.',
+                'image' => asset('images/logo-512.png'),
+                'offers' => [
+                    '@type' => 'Offer',
+                    'price' => '0',
+                    'priceCurrency' => 'IDR',
+                ],
+                'featureList' => [
+                    'Smart Quick-Add Transaction Logger',
+                    'Budget Ceiling & Overspending Alerts',
+                    'AI Financial Advisor',
+                    'Financial Health Score & Audit',
+                    'OCR Receipt Scanner',
+                    'Multi-Wallet & Bank Reconciliation',
+                    'Debt & Loan Settlement Tracker',
+                    'Financial Wrapped Annual Retrospective',
+                    'CSV & PDF Statement Export',
+                ],
+            ],
+            [
+                '@type' => 'Organization',
+                '@id' => url('/') . '#organization',
+                'name' => 'Finora',
+                'url' => url('/'),
+                'logo' => [
+                    '@type' => 'ImageObject',
+                    'url' => asset('images/logo-512.png'),
+                ],
+            ],
+            [
+                '@type' => 'FAQPage',
+                '@id' => url('/') . '#faq',
+                'mainEntity' => [
+                    [
+                        '@type' => 'Question',
+                        'name' => 'Is Finora completely free to use?',
+                        'acceptedAnswer' => [
+                            '@type' => 'Answer',
+                            'text' => 'Yes, Finora is free with zero subscription fees, hidden charges, or payment gating. You have unrestricted access to all features, including budget health, goal tracking, and PDF reports.',
+                        ],
+                    ],
+                    [
+                        '@type' => 'Question',
+                        'name' => 'How secure is my personal financial data?',
+                        'acceptedAnswer' => [
+                            '@type' => 'Answer',
+                            'text' => 'Your data is guarded by strict Laravel Authorization Policies. No other user can ever query or view your transactions. Passwords are encrypted with Bcrypt (12 rounds) and transactions use strict decimal precision.',
+                        ],
+                    ],
+                    [
+                        '@type' => 'Question',
+                        'name' => 'Can I customize my transaction categories?',
+                        'acceptedAnswer' => [
+                            '@type' => 'Answer',
+                            'text' => 'Yes! Upon registration, Finora initializes 8 standard categories for you. You can add, edit, or delete as many custom categories for income, expense, and savings as you need.',
+                        ],
+                    ],
+                    [
+                        '@type' => 'Question',
+                        'name' => 'How do the budget spending ceilings work?',
+                        'acceptedAnswer' => [
+                            '@type' => 'Answer',
+                            'text' => 'You configure a ceiling amount for any category and timeframe. As you log expenses, Finora computes consumed percentages in real time and automatically warns you with a bright NEAR LIMIT! indicator once you cross 90%.',
+                        ],
+                    ],
+                    [
+                        '@type' => 'Question',
+                        'name' => 'Can I export my financial data for tax or bookkeeping?',
+                        'acceptedAnswer' => [
+                            '@type' => 'Answer',
+                            'text' => 'Yes. Finora includes a dedicated Financial Reports module allowing you to export filtered statement ledgers into structured CSV spreadsheets or print-ready PDF audit sheets with a single click.',
+                        ],
+                    ],
+                ],
+            ],
+        ],
+    ], JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE | JSON_PRETTY_PRINT) !!}
+    </script>
     <script>
         (function () {
             const savedTheme = localStorage.getItem('finora_theme') || 'light';

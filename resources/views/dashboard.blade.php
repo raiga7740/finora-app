@@ -607,9 +607,9 @@
         expGrad.addColorStop(1, 'rgba(255, 115, 96, 0.0)');
 
         const isDarkTheme = () => document.documentElement.classList.contains('dark');
-        const chartPointBorder = () => isDarkTheme() ? '#121215' : '#ffffff';
-        const chartGridColor = () => isDarkTheme() ? '#232329' : '#f3f4f6';
-        const chartTickColor = () => isDarkTheme() ? '#71717a' : '#9ca3af';
+        const chartPointBorder = () => isDarkTheme() ? '#181c24' : '#ffffff';
+        const chartGridColor = () => isDarkTheme() ? '#262a33' : '#e5e7eb';
+        const chartTickColor = () => isDarkTheme() ? '#86948a' : '#64748b';
 
         const finoraLineChart = new Chart(lineCtx, {
             type: 'line',
