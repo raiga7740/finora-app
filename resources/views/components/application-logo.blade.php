@@ -1,0 +1,1 @@
+<img src="{{ asset('images/logo.jpg') }}" alt="Finora Logo" width="48" height="48" style="width: 48px; height: 48px; object-fit: cover;" {{ $attributes->merge(['class' => 'w-12 h-12 rounded-xl object-cover shadow-xs']) }}>
