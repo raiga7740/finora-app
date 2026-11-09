@@ -261,33 +261,33 @@ Environment: {{ $systemSpecs['App Environment'] }}`;
             @foreach ($releases as $release)
                 <div x-show="(selectedVersion === 'all' || selectedVersion === '{{ $release['version'] }}')"
                      x-transition
-                     class="bg-white border {{ $release['is_latest'] ? 'border-emerald-300 ring-2 ring-emerald-100' : 'border-gray-100' }} rounded-2xl shadow-2xs overflow-hidden">
+                     class="bg-white dark:bg-[#181c24] border {{ $release['is_latest'] ? 'border-emerald-300 dark:border-emerald-500/30 ring-2 ring-emerald-100 dark:ring-emerald-500/10' : 'border-gray-100 dark:border-gray-800' }} rounded-2xl shadow-2xs overflow-hidden">
 
                     <!-- Release Header Card -->
-                    <div class="p-5 sm:p-6 {{ $release['is_latest'] ? 'bg-gradient-to-r from-emerald-50/60 via-white to-white' : 'bg-gray-50/50' }} border-b border-gray-100">
+                    <div class="p-5 sm:p-6 {{ $release['is_latest'] ? 'bg-gradient-to-r from-emerald-50/60 via-white to-white dark:bg-none dark:bg-emerald-950/20' : 'bg-gray-50/50 dark:bg-gray-900/30' }} border-b border-gray-100 dark:border-gray-800">
                         <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
                             <div class="flex items-center gap-3">
-                                <span class="px-3 py-1 rounded-xl text-xs font-black {{ $release['is_latest'] ? 'bg-[#00c078] text-white shadow-xs' : 'bg-gray-200 text-gray-800' }}">
+                                <span class="px-3 py-1 rounded-xl text-xs font-black {{ $release['is_latest'] ? 'bg-[#00c078] text-white shadow-xs' : 'bg-gray-200 dark:bg-gray-800 text-gray-800 dark:text-gray-200' }}">
                                     {{ $release['version'] }}
                                 </span>
                                 <div>
-                                    <h3 class="text-base sm:text-lg font-extrabold text-gray-900 tracking-tight">
+                                    <h3 class="text-base sm:text-lg font-extrabold text-gray-900 dark:text-gray-100 tracking-tight">
                                         {{ $release['name'] }}
                                     </h3>
-                                    <p class="text-xs text-gray-500 font-medium mt-0.5">
-                                        <span class="font-bold text-gray-700">{{ $release['codename'] }}</span> &bull; {{ $release['date'] }}
+                                    <p class="text-xs text-gray-500 dark:text-gray-400 font-medium mt-0.5">
+                                        <span class="font-bold text-gray-700 dark:text-gray-300">{{ $release['codename'] }}</span> &bull; {{ $release['date'] }}
                                     </p>
                                 </div>
                             </div>
 
                             <div class="flex items-center gap-2">
                                 @if ($release['is_latest'])
-                                    <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-emerald-100 text-emerald-800 text-[11px] font-extrabold">
+                                    <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-emerald-100 dark:bg-emerald-900/40 text-emerald-800 dark:text-emerald-300 text-[11px] font-extrabold">
                                         <span class="w-2 h-2 rounded-full bg-[#00c078] animate-pulse"></span>
                                         {{ __('Rilis Terbaru') }}
                                     </span>
                                 @else
-                                    <span class="px-2.5 py-1 rounded-full bg-gray-100 text-gray-600 text-[11px] font-bold">
+                                    <span class="px-2.5 py-1 rounded-full bg-gray-100 dark:bg-gray-800 text-gray-600 dark:text-gray-400 text-[11px] font-bold">
                                         {{ $release['badge'] }}
                                     </span>
                                 @endif
@@ -295,15 +295,15 @@ Environment: {{ $systemSpecs['App Environment'] }}`;
                         </div>
 
                         <!-- Summary -->
-                        <p class="text-xs sm:text-sm text-gray-600 leading-relaxed mt-3.5 max-w-4xl">
+                        <p class="text-xs sm:text-sm text-gray-600 dark:text-gray-300 leading-relaxed mt-3.5 max-w-4xl">
                             {{ $release['summary'] }}
                         </p>
 
                         <!-- Highlights List -->
                         @if (!empty($release['highlights']))
-                            <div class="mt-4 pt-3 border-t border-gray-200/60 grid grid-cols-1 md:grid-cols-2 gap-2 text-xs">
+                            <div class="mt-4 pt-3 border-t border-gray-200/60 dark:border-gray-800/80 grid grid-cols-1 md:grid-cols-2 gap-2 text-xs">
                                 @foreach ($release['highlights'] as $highlight)
-                                    <div class="flex items-start gap-2 text-gray-700">
+                                    <div class="flex items-start gap-2 text-gray-700 dark:text-gray-300">
                                         <svg class="w-4 h-4 text-[#00c078] shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"/>
                                         </svg>
@@ -482,23 +482,23 @@ Environment: {{ $systemSpecs['App Environment'] }}`;
              class="fixed inset-0 z-50 overflow-y-auto bg-black/60 flex items-center justify-center p-4">
 
             <div @click.outside="showWhatsNewModal = false"
-                 class="relative bg-white rounded-3xl max-w-xl w-full p-6 sm:p-8 shadow-2xl border border-gray-100 overflow-hidden transform transition-all">
+                 class="relative bg-white dark:bg-[#181c24] rounded-3xl max-w-xl w-full p-6 sm:p-8 shadow-2xl border border-gray-100 dark:border-gray-800 overflow-hidden transform transition-all">
 
                 <!-- Header Decor -->
-                <div class="flex items-center justify-between pb-4 border-b border-gray-100">
+                <div class="flex items-center justify-between pb-4 border-b border-gray-100 dark:border-gray-800">
                     <div class="flex items-center gap-3">
                         <div class="w-10 h-10 rounded-2xl bg-emerald-500 text-white flex items-center justify-center font-black shadow-md shadow-emerald-500/25">
                             v2.5
                         </div>
                         <div>
-                            <h3 class="text-lg font-black text-gray-900">{{ __('Sorotan Rilis v2.5.0') }}</h3>
-                            <p class="text-xs text-gray-500">{{ __('Aurora Zenith &bull; Pembaruan Pintar Finora') }}</p>
+                            <h3 class="text-lg font-black text-gray-900 dark:text-gray-100">{{ __('Sorotan Rilis v2.5.0') }}</h3>
+                            <p class="text-xs text-gray-500 dark:text-gray-400">{{ __('Aurora Zenith &bull; Pembaruan Pintar Finora') }}</p>
                         </div>
                     </div>
 
                     <button type="button"
                             @click="showWhatsNewModal = false"
-                            class="p-2 text-gray-400 hover:text-gray-600 rounded-xl hover:bg-gray-100 transition-colors">
+                            class="p-2 text-gray-400 hover:text-gray-600 dark:hover:text-gray-300 rounded-xl hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors">
                         <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
                         </svg>
@@ -507,43 +507,43 @@ Environment: {{ $systemSpecs['App Environment'] }}`;
 
                 <!-- Highlights List -->
                 <div class="py-5 space-y-4">
-                    <div class="flex items-start gap-3.5 p-3 rounded-2xl bg-emerald-50/60 border border-emerald-100">
+                    <div class="flex items-start gap-3.5 p-3 rounded-2xl bg-emerald-50/60 dark:bg-emerald-950/20 border border-emerald-100 dark:border-emerald-900/30">
                         <div class="w-8 h-8 rounded-xl bg-[#00c078] text-white flex items-center justify-center shrink-0 mt-0.5">
                             <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
                             </svg>
                         </div>
                         <div>
-                            <h4 class="text-xs font-extrabold text-gray-900">{{ __('Pusat Info & Versi Aplikasi') }}</h4>
-                            <p class="text-xs text-gray-600 mt-0.5 leading-relaxed">
+                            <h4 class="text-xs font-extrabold text-gray-900 dark:text-gray-100">{{ __('Pusat Info & Versi Aplikasi') }}</h4>
+                            <p class="text-xs text-gray-600 dark:text-gray-300 mt-0.5 leading-relaxed">
                                 {{ __('Cek versi aplikasi aktif, log perubahan sistem, roadmap masa depan, dan status server kapan pun Anda butuhkan.') }}
                             </p>
                         </div>
                     </div>
 
-                    <div class="flex items-start gap-3.5 p-3 rounded-2xl bg-teal-50/60 border border-teal-100">
+                    <div class="flex items-start gap-3.5 p-3 rounded-2xl bg-teal-50/60 dark:bg-teal-950/20 border border-teal-100 dark:border-teal-900/30">
                         <div class="w-8 h-8 rounded-xl bg-teal-600 text-white flex items-center justify-center shrink-0 mt-0.5">
                             <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 7h6m0 10v-3m-3 3h.01M9 17h.01M9 14h.01M12 14h.01M15 11h.01M12 11h.01M9 11h.01M7 21h10a2 2 0 002-2V5a2 2 0 00-2-2H7a2 2 0 00-2 2v14a2 2 0 002 2z"/>
                             </svg>
                         </div>
                         <div>
-                            <h4 class="text-xs font-extrabold text-gray-900">{{ __('Smart Financial Calculator') }}</h4>
-                            <p class="text-xs text-gray-600 mt-0.5 leading-relaxed">
+                            <h4 class="text-xs font-extrabold text-gray-900 dark:text-gray-100">{{ __('Smart Financial Calculator') }}</h4>
+                            <p class="text-xs text-gray-600 dark:text-gray-300 mt-0.5 leading-relaxed">
                                 {{ __('Kalkulator finansial serbaguna dengan konversi jam kerja, simulasi cicilan pinjaman, dan efek bunga majemuk kopi.') }}
                             </p>
                         </div>
                     </div>
 
-                    <div class="flex items-start gap-3.5 p-3 rounded-2xl bg-blue-50/60 border border-blue-100">
+                    <div class="flex items-start gap-3.5 p-3 rounded-2xl bg-blue-50/60 dark:bg-blue-950/20 border border-blue-100 dark:border-blue-900/30">
                         <div class="w-8 h-8 rounded-xl bg-blue-600 text-white flex items-center justify-center shrink-0 mt-0.5">
                             <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"/>
                             </svg>
                         </div>
                         <div>
-                            <h4 class="text-xs font-extrabold text-gray-900">{{ __('Pusat Panduan & Tur Onboarding') }}</h4>
-                            <p class="text-xs text-gray-600 mt-0.5 leading-relaxed">
+                            <h4 class="text-xs font-extrabold text-gray-900 dark:text-gray-100">{{ __('Pusat Panduan & Tur Onboarding') }}</h4>
+                            <p class="text-xs text-gray-600 dark:text-gray-300 mt-0.5 leading-relaxed">
                                 {{ __('Panduan langkah demi langkah serta tur onboarding 6 langkah untuk membantu Anda memaksimalkan setiap modul finansial.') }}
                             </p>
                         </div>
@@ -551,8 +551,12 @@ Environment: {{ $systemSpecs['App Environment'] }}`;
                 </div>
 
                 <!-- Footer Modal -->
-                <div class="pt-4 border-t border-gray-100 flex items-center justify-end gap-2">
+                <div class="pt-4 border-t border-gray-100 dark:border-gray-800 flex items-center justify-end gap-2">
                     <button type="button"
+                            @click="showWhatsNewModal = false"
+                            class="px-4 py-2 rounded-xl bg-gray-100 hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700 text-gray-700 dark:text-gray-300 text-xs font-bold transition cursor-pointer">
+                        {{ __('Tutup') }}
+                    </button>
                             @click="showWhatsNewModal = false"
                             class="px-4 py-2 rounded-xl bg-gray-100 hover:bg-gray-200 text-gray-700 text-xs font-bold transition cursor-pointer">
                         {{ __('Tutup') }}
