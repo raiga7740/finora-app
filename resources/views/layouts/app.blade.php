@@ -160,6 +160,21 @@
                         {{ __('Cashflow Forecast') }}
                     </a>
 
+                    <!-- Smart Financial Calculator -->
+                    <a href="{{ route('calculator.index') }}"
+                       class="flex items-center justify-between px-3.5 py-2.5 rounded-xl text-xs font-semibold transition-all duration-150
+                              {{ request()->routeIs('calculator.*') ? 'bg-[#00c078] text-white shadow-sm shadow-[#00c078]/25' : 'text-gray-600 hover:bg-gray-50 hover:text-gray-900' }}">
+                        <div class="flex items-center gap-3">
+                            <svg class="w-4 h-4 {{ request()->routeIs('calculator.*') ? 'text-white' : 'text-gray-400' }}" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 7h6m0 10v-3m-3 3h.01M9 17h.01M9 14h.01M12 14h.01M15 11h.01M12 11h.01M9 11h.01M7 21h10a2 2 0 002-2V5a2 2 0 00-2-2H7a2 2 0 00-2 2v14a2 2 0 002 2z"/>
+                            </svg>
+                            <span id="sidebar-calculator-label">{{ __('Smart Calculator') }}</span>
+                        </div>
+                        <span class="text-[9px] font-black px-1.5 py-0.5 rounded uppercase tracking-wider {{ request()->routeIs('calculator.*') ? 'bg-white/20 text-white' : 'bg-emerald-50 text-emerald-700' }}">
+                            {{ __('Smart') }}
+                        </span>
+                    </a>
+
                     <!-- Monthly Financial Wrapped -->
                     <a href="{{ route('wrapped.index') }}"
                        class="flex items-center gap-3 px-3.5 py-2.5 rounded-xl text-xs font-semibold transition-all duration-150
@@ -205,6 +220,21 @@
                         </span>
                     </a>
 
+                    <!-- Info & Versi -->
+                    <a href="{{ route('info.index') }}"
+                       class="flex items-center justify-between px-3.5 py-2.5 rounded-xl text-xs font-semibold transition-all duration-150 cursor-pointer
+                              {{ request()->routeIs('info.*') ? 'bg-[#00c078] text-white shadow-sm shadow-[#00c078]/25' : 'text-gray-600 hover:bg-gray-50 hover:text-gray-900' }}">
+                        <div class="flex items-center gap-3">
+                            <svg class="w-4 h-4 {{ request()->routeIs('info.*') ? 'text-white' : 'text-gray-400' }}" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                            </svg>
+                            <span>{{ __('Info & Versi') }}</span>
+                        </div>
+                        <span class="text-[9px] font-black px-1.5 py-0.5 rounded uppercase tracking-wider {{ request()->routeIs('info.*') ? 'bg-white/20 text-white' : 'bg-emerald-50 text-emerald-700' }}">
+                            v{{ config('app.version', '2.5.0') }}
+                        </span>
+                    </a>
+
                     <!-- Settings -->
                     <a href="{{ route('profile.edit') }}"
                        class="flex items-center gap-3 px-3.5 py-2.5 rounded-xl text-xs font-semibold transition-all duration-150
@@ -222,26 +252,36 @@
             <div class="px-4 py-3.5 border-t border-gray-100 flex items-center justify-between text-[11px] text-gray-500 font-medium">
                 <div class="flex items-center gap-2">
                     <span class="w-2 h-2 rounded-full bg-[#00c078] animate-pulse"></span>
-                    <span class="text-[11px] font-semibold text-gray-600">Live Sync</span>
+                    <a href="{{ route('info.index') }}" class="text-[11px] font-semibold text-gray-600 hover:text-[#00c078] transition-colors" title="{{ __('Info & Versi Aplikasi') }}">
+                        Live Sync &bull; v{{ config('app.version', '2.5.0') }}
+                    </a>
                 </div>
-                <!-- Dark / Light Mode Toggle Pill -->
-                <button type="button"
-                        @click="toggleTheme()"
-                        class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-lg bg-gray-100 hover:bg-gray-200/80 text-[10px] font-bold text-gray-700 transition cursor-pointer"
-                        :title="darkMode ? '{{ __('Switch to Light Mode') }}' : '{{ __('Switch to Dark Mode') }}'">
-                    <span x-show="!darkMode" class="inline-flex items-center gap-1">
-                        <svg class="w-3.5 h-3.5 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"/>
-                        </svg>
-                        <span>{{ __('Dark') }}</span>
-                    </span>
-                    <span x-show="darkMode" x-cloak class="inline-flex items-center gap-1">
-                        <svg class="w-3.5 h-3.5 text-gray-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"/>
-                        </svg>
-                        <span>{{ __('Light') }}</span>
-                    </span>
-                </button>
+                <div class="flex items-center gap-1.5">
+                    <!-- Language Switcher Pill -->
+                    <div class="flex items-center bg-gray-100 p-0.5 rounded-lg text-[10px] font-bold">
+                        <a href="{{ route('locale.switch', 'id') }}" class="px-1.5 py-0.5 rounded {{ app()->getLocale() === 'id' ? 'bg-white text-emerald-700 font-extrabold shadow-2xs' : 'text-gray-500 hover:text-gray-800' }}">ID</a>
+                        <a href="{{ route('locale.switch', 'en') }}" class="px-1.5 py-0.5 rounded {{ app()->getLocale() === 'en' ? 'bg-white text-emerald-700 font-extrabold shadow-2xs' : 'text-gray-500 hover:text-gray-800' }}">EN</a>
+                    </div>
+
+                    <!-- Dark / Light Mode Toggle Pill -->
+                    <button type="button"
+                            @click="toggleTheme()"
+                            class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-lg bg-gray-100 hover:bg-gray-200/80 text-[10px] font-bold text-gray-700 transition cursor-pointer"
+                            :title="darkMode ? '{{ __('Switch to Light Mode') }}' : '{{ __('Switch to Dark Mode') }}'">
+                        <span x-show="!darkMode" class="inline-flex items-center gap-1">
+                            <svg class="w-3.5 h-3.5 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"/>
+                            </svg>
+                            <span>{{ __('Dark') }}</span>
+                        </span>
+                        <span x-show="darkMode" x-cloak class="inline-flex items-center gap-1">
+                            <svg class="w-3.5 h-3.5 text-gray-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"/>
+                            </svg>
+                            <span>{{ __('Light') }}</span>
+                        </span>
+                    </button>
+                </div>
             </div>
         </aside>
 
@@ -333,6 +373,16 @@
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"/>
                         </svg>
                         <span class="hidden sm:inline">{{ __('Panduan') }}</span>
+                    </a>
+
+                    <!-- App Info & Version Trigger -->
+                    <a href="{{ route('info.index') }}"
+                       class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-gray-100/90 hover:bg-gray-200/80 text-gray-700 text-xs font-bold transition-all shadow-2xs border border-gray-200/60"
+                       title="{{ __('Info & Versi Aplikasi') }}">
+                        <svg class="w-3.5 h-3.5 text-blue-600 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                        </svg>
+                        <span class="hidden sm:inline">v{{ config('app.version', '2.5.0') }}</span>
                     </a>
 
                     <!-- Interactive Notification Center -->
@@ -457,6 +507,20 @@
                                 </a>
                             </div>
                         </div>
+                    </div>
+
+                    <!-- Dual Language Switcher (ID | EN) -->
+                    <div class="flex items-center bg-gray-100 p-0.5 rounded-xl text-xs font-bold border border-gray-200/60 shadow-2xs">
+                        <a href="{{ route('locale.switch', 'id') }}"
+                           class="px-2 py-1 rounded-lg transition-all text-[11px] {{ app()->getLocale() === 'id' ? 'bg-white text-emerald-700 shadow-xs font-extrabold' : 'text-gray-500 hover:text-gray-900' }}"
+                           title="{{ __('Ganti ke Bahasa Indonesia') }}">
+                            ID
+                        </a>
+                        <a href="{{ route('locale.switch', 'en') }}"
+                           class="px-2 py-1 rounded-lg transition-all text-[11px] {{ app()->getLocale() === 'en' ? 'bg-white text-emerald-700 shadow-xs font-extrabold' : 'text-gray-500 hover:text-gray-900' }}"
+                           title="{{ __('Switch to English') }}">
+                            EN
+                        </a>
                     </div>
 
                     <!-- Dark / Light Mode Toggle Button -->

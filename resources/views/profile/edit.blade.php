@@ -151,6 +151,36 @@
             </form>
         </div>
 
+        <!-- App Version & Release Info -->
+        <div class="p-6 bg-white border border-gray-100 rounded-2xl shadow-2xs flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+            <div class="flex items-center gap-3.5">
+                <div class="w-10 h-10 rounded-2xl bg-emerald-50 text-[#00c078] flex items-center justify-center font-black">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                    </svg>
+                </div>
+                <div>
+                    <div class="flex items-center gap-2">
+                        <h2 class="text-base font-bold text-gray-900">{{ __('Info & Versi Aplikasi') }}</h2>
+                        <span class="px-2 py-0.5 rounded-full text-[10px] font-black uppercase tracking-wider bg-emerald-50 text-emerald-700 border border-emerald-200">
+                            v{{ config('app.version', '2.5.0') }}
+                        </span>
+                    </div>
+                    <p class="text-xs text-gray-500 mt-0.5">
+                        {{ __('Finora') }} {{ config('app.version_codename', 'Aurora Zenith') }} &bull; {{ __('Lihat riwayat rilis & pembaruan sistem.') }}
+                    </p>
+                </div>
+            </div>
+
+            <a href="{{ route('info.index') }}"
+               class="inline-flex items-center gap-1.5 px-4 py-2 bg-gray-100 hover:bg-[#00c078] text-gray-700 hover:text-white text-xs font-bold rounded-xl transition-all shadow-2xs self-start sm:self-auto">
+                <span>{{ __('Lihat Catatan Rilis & Changelog') }}</span>
+                <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
+                </svg>
+            </a>
+        </div>
+
         <!-- Profile Information -->
         <div class="p-6 bg-white border border-gray-100 rounded-2xl shadow-2xs">
             <div class="max-w-xl">

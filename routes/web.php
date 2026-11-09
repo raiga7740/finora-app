@@ -17,8 +17,14 @@ use App\Http\Controllers\RecurringBillController;
 use App\Http\Controllers\DebtController;
 use App\Http\Controllers\WalletController;
 use App\Http\Controllers\CalendarController;
+use App\Http\Controllers\CalculatorController;
 use App\Http\Controllers\ReceiptScannerController;
+use App\Http\Controllers\AppInfoController;
+use App\Http\Controllers\LocaleController;
 use Illuminate\Support\Facades\Route;
+
+// Fast Locale Switcher (ID / EN)
+Route::match(['get', 'post'], '/locale/{locale}', [LocaleController::class, 'switch'])->name('locale.switch');
 
 Route::get('/', function () {
     if (auth()->check()) {
@@ -75,12 +81,18 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/wrapped', [FinancialWrappedController::class, 'index'])->name('wrapped.index');
     Route::get('/cashflow-forecast', [\App\Http\Controllers\CashflowForecastController::class, 'index'])->name('cashflow.index');
     Route::get('/tutorials', [\App\Http\Controllers\TutorialController::class, 'index'])->name('tutorials.index');
+    Route::get('/info', [AppInfoController::class, 'index'])->name('info.index');
+    Route::get('/info/whats-new', [AppInfoController::class, 'whatsNew'])->name('info.whats-new');
     Route::get('/reports', [ReportController::class, 'index'])->name('reports.index');
     Route::get('/reports/export/csv', [ReportController::class, 'exportCsv'])->name('reports.export.csv');
     Route::get('/reports/export/pdf', [ReportController::class, 'exportPdf'])->name('reports.export.pdf');
 
     // Cash Flow Calendar
     Route::get('/calendar', [CalendarController::class, 'index'])->name('calendar.index');
+
+    // Smart Financial Calculator & Scratchpad Suite
+    Route::get('/calculator', [CalculatorController::class, 'index'])->name('calculator.index');
+    Route::post('/calculator/transaction', [CalculatorController::class, 'quickTransaction'])->name('calculator.transaction');
 
     // AI Financial Advisor (Groq / Grok)
     Route::post('/ai/chat', [AiAssistantController::class, 'chat'])->name('ai.chat');

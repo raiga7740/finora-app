@@ -13,7 +13,20 @@ return [
     |
     */
 
-    'name' => env('APP_NAME', 'Laravel'),
+    'name' => env('APP_NAME', 'Finora'),
+
+    /*
+    |--------------------------------------------------------------------------
+    | Application Version & Codename
+    |--------------------------------------------------------------------------
+    |
+    | The current release version and codename of the application.
+    |
+    */
+
+    'version' => env('APP_VERSION', '2.5.0'),
+    'version_codename' => env('APP_VERSION_CODENAME', 'Aurora Zenith'),
+    'version_date' => env('APP_VERSION_DATE', '9 November 2026'),
 
     /*
     |--------------------------------------------------------------------------
