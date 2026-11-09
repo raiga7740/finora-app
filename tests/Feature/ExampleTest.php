@@ -19,6 +19,8 @@ class ExampleTest extends TestCase
         $response->assertSee('Build Your Future');
         $response->assertSee(route('login'));
         $response->assertSee(route('register'));
+        $response->assertSee('toggleTheme()', false);
+        $response->assertSee('Switch to Dark Mode', false);
 
         // SEO Verification
         $response->assertSee('<meta name="description"', false);

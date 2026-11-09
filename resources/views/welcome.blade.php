@@ -139,8 +139,8 @@
     </script>
     <script>
         (function () {
-            const savedTheme = localStorage.getItem('finora_theme') || 'light';
-            if (savedTheme === 'dark' || (savedTheme === 'system' && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+            const savedTheme = localStorage.getItem('finora_theme');
+            if (savedTheme === 'dark' || (!savedTheme && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
                 document.documentElement.classList.add('dark');
             } else {
                 document.documentElement.classList.remove('dark');
@@ -148,7 +148,23 @@
         })();
     </script>
 </head>
-<body class="font-sans antialiased bg-[#fbfcfd] text-gray-900 selection:bg-[#00c078] selection:text-white overflow-x-hidden w-full max-w-full" x-data="{ mobileMenuOpen: false }">
+<body class="font-sans antialiased bg-[#fbfcfd] text-gray-900 selection:bg-[#00c078] selection:text-white overflow-x-hidden w-full max-w-full"
+      x-data="{
+          mobileMenuOpen: false,
+          darkMode: document.documentElement.classList.contains('dark'),
+          toggleTheme() {
+              this.darkMode = !this.darkMode;
+              if (this.darkMode) {
+                  document.documentElement.classList.add('dark');
+                  localStorage.setItem('finora_theme', 'dark');
+              } else {
+                  document.documentElement.classList.remove('dark');
+                  localStorage.setItem('finora_theme', 'light');
+              }
+              window.dispatchEvent(new CustomEvent('finora-theme-changed', { detail: { dark: this.darkMode } }));
+          }
+      }"
+      @finora-theme-changed.window="darkMode = $event.detail.dark">
 
     <!-- ============================================================== -->
     <!-- NAVIGATION BAR                                                 -->
@@ -169,8 +185,24 @@
                 <a href="#faq" class="hover:text-[#00c078] transition-colors py-1">FAQ</a>
             </nav>
 
-            <!-- Auth Buttons -->
-            <div class="hidden sm:flex items-center gap-4">
+            <!-- Theme Toggle & Auth Buttons (Desktop) -->
+            <div class="hidden sm:flex items-center gap-3">
+                <!-- Dark / Light Mode Toggle Button -->
+                <button type="button"
+                        @click="toggleTheme()"
+                        class="p-2.5 rounded-xl border border-gray-200 text-gray-600 hover:text-gray-900 hover:bg-gray-100/80 transition-all cursor-pointer focus:outline-hidden"
+                        :title="darkMode ? 'Switch to Light Mode' : 'Switch to Dark Mode'"
+                        :aria-label="darkMode ? 'Switch to Light Mode' : 'Switch to Dark Mode'">
+                    <!-- Sun icon (shown in dark mode) -->
+                    <svg x-show="darkMode" x-cloak class="w-5 h-5 text-amber-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"/>
+                    </svg>
+                    <!-- Moon icon (shown in light mode) -->
+                    <svg x-show="!darkMode" class="w-5 h-5 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"/>
+                    </svg>
+                </button>
+
                 @if (Route::has('login'))
                     @auth
                         <a href="{{ route('dashboard') }}"
@@ -191,12 +223,27 @@
                 @endif
             </div>
 
-            <!-- Mobile Menu Toggle -->
-            <button @click="mobileMenuOpen = !mobileMenuOpen" class="md:hidden p-2.5 rounded-xl border border-gray-200 text-gray-700 hover:text-gray-900 hover:bg-gray-50 transition-colors">
-                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" :d="mobileMenuOpen ? 'M6 18L18 6M6 6l12 12' : 'M4 6h16M4 12h16M4 18h16'"/>
-                </svg>
-            </button>
+            <!-- Mobile Controls (Theme Toggle & Menu Toggle) -->
+            <div class="flex items-center gap-2 md:hidden">
+                <button type="button"
+                        @click="toggleTheme()"
+                        class="sm:hidden p-2.5 rounded-xl border border-gray-200 text-gray-700 hover:text-gray-900 hover:bg-gray-50 transition-colors cursor-pointer"
+                        :title="darkMode ? 'Switch to Light Mode' : 'Switch to Dark Mode'"
+                        :aria-label="darkMode ? 'Switch to Light Mode' : 'Switch to Dark Mode'">
+                    <svg x-show="darkMode" x-cloak class="w-5 h-5 text-amber-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"/>
+                    </svg>
+                    <svg x-show="!darkMode" class="w-5 h-5 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"/>
+                    </svg>
+                </button>
+
+                <button @click="mobileMenuOpen = !mobileMenuOpen" class="p-2.5 rounded-xl border border-gray-200 text-gray-700 hover:text-gray-900 hover:bg-gray-50 transition-colors">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" :d="mobileMenuOpen ? 'M6 18L18 6M6 6l12 12' : 'M4 6h16M4 12h16M4 18h16'"/>
+                    </svg>
+                </button>
+            </div>
         </div>
 
         <!-- Mobile Menu Dropdown -->
@@ -209,6 +256,23 @@
             <a href="#how-it-works" @click="mobileMenuOpen = false" class="block py-2 text-base font-bold text-gray-800 hover:text-[#00c078]">How It Works</a>
             <a href="#showcase" @click="mobileMenuOpen = false" class="block py-2 text-base font-bold text-gray-800 hover:text-[#00c078]">Showcase</a>
             <a href="#faq" @click="mobileMenuOpen = false" class="block py-2 text-base font-bold text-gray-800 hover:text-[#00c078]">FAQ</a>
+            
+            <!-- Mobile Menu Theme Toggle Row -->
+            <button type="button"
+                    @click="toggleTheme()"
+                    class="w-full flex items-center justify-between py-2.5 px-3 rounded-xl border border-gray-200 text-sm font-bold text-gray-800 hover:bg-gray-50 transition-colors">
+                <span class="flex items-center gap-2.5">
+                    <svg x-show="darkMode" x-cloak class="w-5 h-5 text-amber-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"/>
+                    </svg>
+                    <svg x-show="!darkMode" class="w-5 h-5 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"/>
+                    </svg>
+                    <span x-text="darkMode ? 'Switch to Light Mode' : 'Switch to Dark Mode'">Switch to Dark Mode</span>
+                </span>
+                <span class="text-xs px-2 py-0.5 rounded-md bg-gray-100 text-gray-600 font-semibold" x-text="darkMode ? 'Dark' : 'Light'">Light</span>
+            </button>
+
             <div class="pt-4 border-t border-gray-100 flex flex-col gap-2.5">
                 @auth
                     <a href="{{ route('dashboard') }}" class="w-full text-center py-3 bg-[#00c078] text-white text-sm font-bold rounded-xl shadow-xs">Go to Dashboard</a>
@@ -982,6 +1046,19 @@
                     <a href="#faq" class="hover:text-gray-600">Privacy Policy</a>
                     <a href="#faq" class="hover:text-gray-600">Terms of Service</a>
                     <a href="#faq" class="hover:text-gray-600">Security Architecture</a>
+                    <!-- Footer Theme Toggle -->
+                    <button type="button"
+                            @click="toggleTheme()"
+                            class="inline-flex items-center gap-1.5 text-gray-500 hover:text-gray-800 transition-colors cursor-pointer"
+                            :title="darkMode ? 'Switch to Light Mode' : 'Switch to Dark Mode'">
+                        <svg x-show="darkMode" x-cloak class="w-4 h-4 text-amber-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"/>
+                        </svg>
+                        <svg x-show="!darkMode" class="w-4 h-4 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"/>
+                        </svg>
+                        <span x-text="darkMode ? 'Light Mode' : 'Dark Mode'"></span>
+                    </button>
                 </div>
             </div>
         </div>
