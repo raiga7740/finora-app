@@ -22,7 +22,7 @@
         }
     </script>
 </head>
-<body class="font-sans antialiased bg-[#fbfcfd] text-gray-900"
+<body class="font-sans antialiased bg-[#f1f5f9] text-gray-900"
       x-data="{
           sidebarOpen: false,
           darkMode: document.documentElement.classList.contains('dark'),
@@ -561,7 +561,7 @@
             </header>
 
             <!-- Page Content -->
-            <main class="flex-1 overflow-y-auto overflow-x-hidden px-4 lg:px-8 py-6 max-w-full">
+            <main class="flex-1 overflow-y-auto overflow-x-hidden px-4 lg:px-8 py-8 max-w-full bg-[#f1f5f9] dark:bg-[#0f131c]">
                 @if (session('status'))
                     <div class="mb-5 px-4 py-3 rounded-xl bg-emerald-50 border border-emerald-100 text-emerald-700 text-xs font-medium flex items-center gap-2">
                         <svg class="w-4 h-4 text-emerald-600 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>

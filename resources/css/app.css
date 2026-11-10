@@ -79,16 +79,18 @@ table td,
 
 /* Light Canvas Foundation */
 html:not(.dark) body,
+html:not(.dark) main,
 html:not(.dark) .bg-\[\#fbfcfd\],
-html:not(.dark) .bg-\[\#f4f7fa\] {
-    background-color: #f8f9ff !important; /* surface / background */
-    color: #0b1c30 !important; /* on-surface */
+html:not(.dark) .bg-\[\#f4f7fa\],
+html:not(.dark) .bg-\[\#f1f5f9\] {
+    background-color: #f1f5f9 !important; /* precision slate-100 canvas */
+    color: #0f172a !important; /* on-surface slate-900 */
 }
 
 /* Cards & Structural Containers (Elevation 1: Crisp White + Hairline 1px Border) */
 html:not(.dark) .bg-white {
     background-color: #ffffff;
-    border-color: #e5e7eb;
+    border-color: #e2e8f0;
 }
 
 html:not(.dark) aside,
@@ -772,4 +774,23 @@ html.dark kbd {
     background-color: #1c2028 !important;
     border-color: #262a33 !important;
     color: #86948a !important;
+}
+
+/* Version Cards Explicit Spacing (Prevents Alpine transition collapsing) */
+.release-card {
+    margin-bottom: 2.5rem !important;
+}
+
+.release-card:last-child {
+    margin-bottom: 0 !important;
+}
+
+@media (min-width: 640px) {
+    .release-card {
+        margin-bottom: 3.5rem !important;
+    }
+
+    .release-card:last-child {
+        margin-bottom: 0 !important;
+    }
 }
