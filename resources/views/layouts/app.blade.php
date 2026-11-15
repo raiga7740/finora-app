@@ -298,7 +298,7 @@
             <!-- Top Bar Header (Google Stitch Style) -->
             <header class="relative z-30 bg-white border-b border-gray-100 px-3 sm:px-6 lg:px-8 h-16 flex items-center justify-between gap-2 sm:gap-4">
                 <div class="flex items-center gap-2 sm:gap-3 flex-1 min-w-0">
-                    <button @click="sidebarOpen = true" class="lg:hidden p-1.5 sm:p-2 text-gray-500 hover:text-gray-700 shrink-0">
+                    <button @click="sidebarOpen = true" class="lg:hidden p-2 -ml-1 text-gray-500 hover:text-gray-700 hover:bg-gray-100 rounded-xl transition-colors shrink-0 cursor-pointer" aria-label="{{ __('Buka Navigasi') }}">
                         <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/></svg>
                     </button>
 
@@ -333,7 +333,7 @@
 
                     <!-- Search Box (Responsive flex container) -->
                     <form method="GET" action="{{ route('transactions.index') }}"
-                          class="h-9 w-full max-w-[170px] sm:max-w-xs md:max-w-sm lg:max-w-md flex items-center bg-gray-100/80 hover:bg-gray-100/90 focus-within:bg-white focus-within:ring-2 focus-within:ring-[#00c078] rounded-xl px-2.5 sm:px-3 transition-all shadow-2xs">
+                          class="h-9 flex-1 min-w-0 max-w-[140px] sm:max-w-xs md:max-w-sm lg:max-w-md flex items-center bg-gray-100/80 hover:bg-gray-100/90 focus-within:bg-white focus-within:ring-2 focus-within:ring-[#00c078] rounded-xl px-2.5 sm:px-3 transition-all shadow-2xs">
                         <svg class="w-4 h-4 text-gray-400 shrink-0 mr-1.5 sm:mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/>
                         </svg>
@@ -342,7 +342,7 @@
                             id="globalSearchInput"
                             name="search"
                             value="{{ request('search') }}"
-                            placeholder="Search ledger..."
+                            placeholder="{{ __('Search...') }}"
                             class="w-full bg-transparent border-0 p-0 text-xs text-gray-900 placeholder-gray-400 focus:outline-none focus:ring-0 leading-none min-w-0"
                         >
                         <kbd class="shrink-0 ml-1.5 px-1.5 py-0.5 bg-white border border-gray-200 text-[10px] text-gray-400 rounded font-mono hidden sm:inline-flex items-center gap-0.5 shadow-2xs">
@@ -353,43 +353,43 @@
                 </div>
 
                 <!-- Right Profile & Actions -->
-                <div class="flex items-center gap-2 sm:gap-3 shrink-0">
+                <div class="flex items-center gap-1.5 sm:gap-2.5 md:gap-3 shrink-0">
                     <!-- Finora AI Advisor Quick Trigger -->
                     <button type="button"
                             @click="$dispatch('toggle-finora-ai')"
-                            class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-emerald-50 hover:bg-emerald-100/80 text-[#00c078] border border-emerald-200/60 text-xs font-bold transition-all cursor-pointer shadow-2xs"
+                            class="inline-flex items-center justify-center gap-1.5 p-2 sm:px-3 sm:py-1.5 rounded-xl bg-emerald-50 hover:bg-emerald-100/80 text-[#00c078] border border-emerald-200/60 text-xs font-bold transition-all cursor-pointer shadow-2xs shrink-0"
                             title="Open Finora AI Advisor">
-                        <svg class="w-3.5 h-3.5 text-[#00c078] shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <svg class="w-4 h-4 text-[#00c078] shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/>
                         </svg>
                         <span class="hidden sm:inline">Finora AI</span>
                     </button>
 
-                    <!-- Help & Feature Tutorials Trigger -->
+                    <!-- Help & Feature Tutorials Trigger (Hidden on mobile, in drawer & user menu) -->
                     <a href="{{ route('tutorials.index') }}"
-                       class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-gray-100/90 hover:bg-gray-200/80 text-gray-700 text-xs font-bold transition-all shadow-2xs border border-gray-200/60"
+                       class="hidden md:inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-gray-100/90 hover:bg-gray-200/80 text-gray-700 text-xs font-bold transition-all shadow-2xs border border-gray-200/60 shrink-0"
                        title="{{ __('Panduan & Tutorial Fitur') }}">
                         <svg class="w-3.5 h-3.5 text-emerald-600 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"/>
                         </svg>
-                        <span class="hidden sm:inline">{{ __('Panduan') }}</span>
+                        <span>{{ __('Panduan') }}</span>
                     </a>
 
-                    <!-- App Info & Version Trigger -->
+                    <!-- App Info & Version Trigger (Hidden on mobile/tablet, in sidebar) -->
                     <a href="{{ route('info.index') }}"
-                       class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-gray-100/90 hover:bg-gray-200/80 text-gray-700 text-xs font-bold transition-all shadow-2xs border border-gray-200/60"
+                       class="hidden lg:inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-gray-100/90 hover:bg-gray-200/80 text-gray-700 text-xs font-bold transition-all shadow-2xs border border-gray-200/60 shrink-0"
                        title="{{ __('Info & Versi Aplikasi') }}">
                         <svg class="w-3.5 h-3.5 text-blue-600 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
                         </svg>
-                        <span class="hidden sm:inline">v{{ config('app.version', '2.5.0') }}</span>
+                        <span>v{{ config('app.version', '2.5.0') }}</span>
                     </a>
 
                     <!-- Interactive Notification Center -->
                     @php
                         $notifData = \App\Http\Controllers\NotificationController::getForUser(auth()->user());
                     @endphp
-                    <div class="relative"
+                    <div class="relative shrink-0"
                          x-data="{
                              notifOpen: false,
                              unreadCount: {{ $notifData['unread_count'] }},
@@ -411,7 +411,7 @@
                         <button type="button"
                                 @click="notifOpen = !notifOpen"
                                 @click.outside="notifOpen = false"
-                                class="relative p-2 rounded-xl text-gray-500 hover:text-gray-800 hover:bg-gray-100/80 transition-colors cursor-pointer"
+                                class="relative p-2 rounded-xl text-gray-500 hover:text-gray-800 hover:bg-gray-100/80 transition-colors cursor-pointer shrink-0"
                                 title="{{ __('Notification Center') }}">
                             <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9"/>
@@ -430,8 +430,8 @@
                              x-transition:leave="transition ease-in duration-100"
                              x-transition:leave-start="opacity-100 translate-y-0 scale-100"
                              x-transition:leave-end="opacity-0 translate-y-1 scale-95"
-                             style="display: none; width: 340px; max-width: calc(100vw - 2rem);"
-                             class="absolute right-0 mt-2 w-80 sm:w-96 bg-white border border-gray-200 rounded-2xl shadow-2xl z-50 overflow-hidden">
+                             style="display: none;"
+                             class="fixed inset-x-3 top-16 sm:absolute sm:inset-x-auto sm:right-0 sm:top-auto sm:mt-2 w-auto sm:w-96 max-w-[calc(100vw-1.5rem)] sm:max-w-none bg-white border border-gray-200 rounded-2xl shadow-2xl z-50 overflow-hidden">
 
                             <!-- Header -->
                             <div class="px-4 py-3 bg-gray-950 text-white flex items-center justify-between">
@@ -509,8 +509,8 @@
                         </div>
                     </div>
 
-                    <!-- Dual Language Switcher (ID | EN) -->
-                    <div class="flex items-center bg-gray-100 p-0.5 rounded-xl text-xs font-bold border border-gray-200/60 shadow-2xs">
+                    <!-- Dual Language Switcher (ID | EN) (Hidden on mobile, in sidebar & user menu) -->
+                    <div class="hidden sm:flex items-center bg-gray-100 p-0.5 rounded-xl text-xs font-bold border border-gray-200/60 shadow-2xs shrink-0">
                         <a href="{{ route('locale.switch', 'id') }}"
                            class="px-2 py-1 rounded-lg transition-all text-[11px] {{ app()->getLocale() === 'id' ? 'bg-white text-emerald-700 shadow-xs font-extrabold' : 'text-gray-500 hover:text-gray-900' }}"
                            title="{{ __('Ganti ke Bahasa Indonesia') }}">
@@ -523,10 +523,10 @@
                         </a>
                     </div>
 
-                    <!-- Dark / Light Mode Toggle Button -->
+                    <!-- Dark / Light Mode Toggle Button (Hidden on mobile, in sidebar & user menu) -->
                     <button type="button"
                             @click="toggleTheme()"
-                            class="p-2 rounded-xl text-gray-500 hover:text-gray-800 hover:bg-gray-100/80 transition-colors cursor-pointer"
+                            class="hidden sm:inline-flex p-2 rounded-xl text-gray-500 hover:text-gray-800 hover:bg-gray-100/80 transition-colors cursor-pointer shrink-0"
                             :title="darkMode ? '{{ __('Switch to Light Mode') }}' : '{{ __('Switch to Dark Mode') }}'">
                         <!-- Sun icon (shown in dark mode) -->
                         <svg x-show="darkMode" x-cloak class="w-5 h-5 text-amber-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -538,9 +538,13 @@
                         </svg>
                     </button>
 
-                    <!-- User Avatar & Details -->
-                    <div class="flex items-center gap-2 sm:gap-3 pl-2 border-l border-gray-100">
-                        <a href="{{ route('profile.edit') }}" class="flex items-center gap-2 sm:gap-2.5 hover:opacity-90 transition-opacity">
+                    <!-- User Avatar & Dropdown Menu -->
+                    <div class="relative shrink-0 sm:pl-2.5 sm:border-l sm:border-gray-100" x-data="{ userMenuOpen: false }">
+                        <button @click="userMenuOpen = !userMenuOpen"
+                                @click.outside="userMenuOpen = false"
+                                type="button"
+                                class="flex items-center gap-2 p-1 rounded-xl hover:bg-gray-100/80 transition-colors cursor-pointer select-none"
+                                title="{{ auth()->user()->name }}">
                             <div class="w-8 h-8 sm:w-9 sm:h-9 rounded-full bg-gradient-to-tr from-emerald-600 to-teal-400 flex items-center justify-center text-white text-xs font-bold ring-2 ring-emerald-50 shrink-0">
                                 {{ strtoupper(substr(auth()->user()->name, 0, 2)) }}
                             </div>
@@ -548,14 +552,90 @@
                                 <p class="text-xs font-bold text-gray-900 leading-tight">{{ auth()->user()->name }}</p>
                                 <p class="text-[10px] text-emerald-600 font-semibold leading-tight">Pro Member</p>
                             </div>
-                        </a>
+                            <svg class="w-3.5 h-3.5 text-gray-400 hidden sm:block transition-transform duration-150"
+                                 :class="userMenuOpen ? 'rotate-180' : ''" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
+                            </svg>
+                        </button>
 
-                        <form method="POST" action="{{ route('logout') }}" class="ml-0.5 sm:ml-1">
-                            @csrf
-                            <button type="submit" class="text-gray-400 hover:text-gray-600 p-1" title="Log Out">
-                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"/></svg>
-                            </button>
-                        </form>
+                        <!-- User Dropdown Menu -->
+                        <div x-show="userMenuOpen"
+                             x-transition:enter="transition ease-out duration-150"
+                             x-transition:enter-start="opacity-0 translate-y-1 scale-95"
+                             x-transition:enter-end="opacity-100 translate-y-0 scale-100"
+                             x-transition:leave="transition ease-in duration-100"
+                             x-transition:leave-start="opacity-100 translate-y-0 scale-100"
+                             x-transition:leave-end="opacity-0 translate-y-1 scale-95"
+                             style="display: none;"
+                             class="absolute right-0 mt-2 w-60 bg-white border border-gray-100 rounded-2xl shadow-xl py-2 z-50 text-xs overflow-hidden">
+
+                            <!-- User Info Header -->
+                            <div class="px-4 py-3 border-b border-gray-100 bg-gray-50/50">
+                                <p class="font-extrabold text-gray-900 truncate">{{ auth()->user()->name }}</p>
+                                <p class="text-[11px] text-gray-500 truncate mt-0.5">{{ auth()->user()->email }}</p>
+                                <span class="inline-block mt-1.5 px-2 py-0.5 rounded-md text-[9px] font-black uppercase tracking-wider bg-emerald-50 text-[#00c078]">
+                                    Pro Member
+                                </span>
+                            </div>
+
+                            <!-- Navigation links -->
+                            <div class="py-1">
+                                <a href="{{ route('profile.edit') }}"
+                                   class="flex items-center gap-2.5 px-4 py-2 text-gray-700 hover:bg-emerald-50 hover:text-emerald-700 font-medium transition-colors">
+                                    <svg class="w-4 h-4 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"/>
+                                    </svg>
+                                    <span>{{ __('Profile & Settings') }}</span>
+                                </a>
+                                <a href="{{ route('tutorials.index') }}"
+                                   class="md:hidden flex items-center gap-2.5 px-4 py-2 text-gray-700 hover:bg-emerald-50 hover:text-emerald-700 font-medium transition-colors">
+                                    <svg class="w-4 h-4 text-emerald-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"/>
+                                    </svg>
+                                    <span>{{ __('Panduan & Tutorial') }}</span>
+                                </a>
+                            </div>
+
+                            <!-- Mobile Quick Preferences: Theme & Language -->
+                            <div class="sm:hidden border-t border-gray-100 py-2 px-4 space-y-2 bg-gray-50/40">
+                                <div class="flex items-center justify-between">
+                                    <span class="text-[11px] font-semibold text-gray-600">{{ __('Tampilan') }}</span>
+                                    <button type="button"
+                                            @click="toggleTheme()"
+                                            class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-lg bg-white border border-gray-200 text-[10px] font-bold text-gray-700 shadow-2xs">
+                                        <span x-show="!darkMode" class="flex items-center gap-1">
+                                            <svg class="w-3 h-3 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"/></svg>
+                                            <span>{{ __('Dark') }}</span>
+                                        </span>
+                                        <span x-show="darkMode" x-cloak class="flex items-center gap-1">
+                                            <svg class="w-3 h-3 text-amber-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"/></svg>
+                                            <span>{{ __('Light') }}</span>
+                                        </span>
+                                    </button>
+                                </div>
+                                <div class="flex items-center justify-between">
+                                    <span class="text-[11px] font-semibold text-gray-600">{{ __('Bahasa') }}</span>
+                                    <div class="flex items-center bg-white border border-gray-200 p-0.5 rounded-lg text-[10px] font-bold shadow-2xs">
+                                        <a href="{{ route('locale.switch', 'id') }}" class="px-2 py-0.5 rounded {{ app()->getLocale() === 'id' ? 'bg-[#00c078] text-white shadow-xs font-black' : 'text-gray-500' }}">ID</a>
+                                        <a href="{{ route('locale.switch', 'en') }}" class="px-2 py-0.5 rounded {{ app()->getLocale() === 'en' ? 'bg-[#00c078] text-white shadow-xs font-black' : 'text-gray-500' }}">EN</a>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Logout Action -->
+                            <div class="border-t border-gray-100 pt-1">
+                                <form method="POST" action="{{ route('logout') }}">
+                                    @csrf
+                                    <button type="submit"
+                                            class="w-full flex items-center gap-2.5 px-4 py-2 text-xs font-bold text-red-600 hover:bg-red-50 hover:text-red-700 transition-colors cursor-pointer text-left">
+                                        <svg class="w-4 h-4 text-red-500 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"/>
+                                        </svg>
+                                        <span>{{ __('Log Out') }}</span>
+                                    </button>
+                                </form>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </header>
